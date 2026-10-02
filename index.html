@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- ============================================================
+       HOW TO USE
+       1. Save this file as index.html in your GitHub repository.
+       2. In GitHub: Settings > Pages > Deploy from branch > main.
+       3. Search for "EDIT:" in this file to find everything you
+          should personalise (text, links, colours, projects).
+       ============================================================ -->
+
+  <!-- EDIT: page title (shows in the browser tab and Google results) -->
+  <title>Your Name | Marketing Portfolio</title>
+  <!-- EDIT: short description shown in Google results -->
+  <meta name="description" content="Marketing portfolio of Your Name: campaigns, results and how to work together.">
+
+  <!-- Fonts. To change them, swap the names here AND in --font-head / --font-body below -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== EDIT: COLOURS & FONTS (change once, updates everywhere) ===== */
+    :root {
+      --bg: #F3F1FA;        /* page background */
+      --ink: #1B1840;       /* main text colour */
+      --muted: #5B5880;     /* secondary text */
+      --accent: #2B3BFF;    /* buttons, links */
+      --highlight: #FFD84D; /* yellow marker behind key text */
+      --card: #FFFFFF;      /* card background */
+      --line: #D9D5EE;      /* borders */
+      --font-head: "Bricolage Grotesque", system-ui, sans-serif;
+      --font-body: "Instrument Sans", system-ui, sans-serif;
+    }
+    /* Dark mode: edit these if you want different dark colours */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #12102B; --ink: #F1EFFF; --muted: #A9A5D1;
+        --accent: #8F9BFF; --card: #1C1940; --line: #342F66;
+      }
+    }
+
+    /* ===== BASE STYLES (usually no need to change) ===== */
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font: 400 1.05rem/1.65 var(--font-body); }
+    h1, h2, h3 { font-family: var(--font-head); line-height: 1.1; letter-spacing: -0.02em; }
+    a { color: var(--accent); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .wrap { max-width: 1060px; margin: 0 auto; padding: 0 1.5rem; }
+    section { padding: 4.5rem 0; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 2rem; }
+    .mark { background: linear-gradient(transparent 55%, var(--highlight) 55%); } /* yellow highlighter effect */
+
+    /* Navigation */
+    nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 0; }
+    nav .logo { font: 800 1.2rem var(--font-head); text-decoration: none; color: var(--ink); }
+    nav ul { display: flex; gap: 1.5rem; list-style: none; padding: 0; }
+    nav ul a { color: var(--ink); text-decoration: none; font-weight: 500; }
+    nav ul a:hover { color: var(--accent); }
+
+    /* Buttons */
+    .btn { display: inline-block; padding: .8rem 1.4rem; border-radius: 8px; background: var(--accent);
+           color: #fff; font-weight: 600; text-decoration: none; }
+    .btn:hover { filter: brightness(1.12); }
+    .btn.ghost { background: transparent; color: var(--ink); border: 2px solid var(--ink); }
+    :root[data-theme] .btn { color: #fff; }
+    @media (prefers-color-scheme: dark) { .btn { color: #12102B; } .btn.ghost { color: var(--ink); } }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3rem; align-items: center; padding-top: 3rem; }
+    .hero h1 { font-size: clamp(2.5rem, 7vw, 4.6rem); font-weight: 800; margin-bottom: 1.25rem; }
+    .hero p { color: var(--muted); max-width: 34rem; margin-bottom: 2rem; }
+    .hero .actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* Headline results in the hero (the three "wins") */
+    .wins { display: grid; gap: 1rem; }
+    .win { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.1rem 1.4rem; }
+    .win strong { display: block; font: 800 2.2rem var(--font-head); }
+    .win span { color: var(--muted); font-size: .95rem; }
+    .win:nth-child(2) { margin-left: 1.5rem; }  /* offset for a stacked look */
+
+    /* Case study cards */
+    .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; }
+    .case { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+            display: flex; flex-direction: column; }
+    .case .thumb { height: 150px; display: grid; place-items: center; color: #fff;
+                   font: 800 1.6rem var(--font-head); }
+    .case .body { padding: 1.4rem; display: flex; flex-direction: column; gap: .6rem; flex: 1; }
+    .case .tag { color: var(--muted); font-size: .9rem; }
+    .case h3 { font-size: 1.35rem; }
+    .case .result { font-weight: 600; }
+    .case a.more { margin-top: auto; font-weight: 600; }
+
+    /* Services */
+    .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }
+    .services h3 { font-size: 1.2rem; margin-bottom: .4rem; border-top: 3px solid var(--accent); padding-top: .8rem; }
+    .services p { color: var(--muted); font-size: 1rem; }
+
+    /* About */
+    .about { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; align-items: start; }
+    .about .photo { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; background: var(--line); }
+    .about p + p { margin-top: 1rem; }
+    .about .tools { margin-top: 1.25rem; color: var(--muted); font-size: .95rem; }
+
+    /* Contact + footer */
+    .contact { text-align: center; }
+    .contact p { color: var(--muted); max-width: 32rem; margin: 0 auto 2rem; }
+    footer { padding: 2rem 0; text-align: center; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); }
+    footer a { color: var(--muted); margin: 0 .6rem; }
+
+    /* Mobile layout */
+    @media (max-width: 760px) {
+      .hero, .about { grid-template-columns: 1fr; }
+      .win:nth-child(2) { margin-left: 0; }
+      nav ul { gap: 1rem; font-size: .95rem; }
+      section { padding: 3rem 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- ===== NAVIGATION =====
+         EDIT: your name/brand in .logo. The href="#..." links jump to the
+         section with the matching id below. Delete an <li> to remove a link. -->
+    <nav>
+      <a class="logo" href="#">Your Name</a>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- ===== HERO (first thing visitors see) =====
+         EDIT: headline, intro sentence, button text and links.
+         The <span class="mark"> adds the yellow highlight - move or remove it. -->
+    <header class="hero">
+      <div>
+        <h1>Marketing that <span class="mark">fills the pipeline</span>, not just the feed.</h1>
+        <p>I'm Your Name, a marketer focused on [EDIT: your specialty, e.g. paid social, email, SEO, brand]. I help [EDIT: type of client] turn attention into customers.</p>
+        <div class="actions">
+          <a class="btn" href="#work">See my work</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <!-- EDIT: your three best results. Use real numbers you can back up. -->
+      <div class="wins">
+        <div class="win"><strong>+212%</strong><span>qualified leads in 6 months</span></div>
+        <div class="win"><strong>38% open rate</strong><span>on a 40,000-subscriber list</span></div>
+        <div class="win"><strong>3.4x ROAS</strong><span>on a $25k paid social budget</span></div>
+      </div>
+    </header>
+
+    <!-- ===== SELECTED WORK =====
+         EDIT: each <article class="case"> is one project. Copy and paste a whole
+         block to add another; delete one to remove it.
+         - thumb: the coloured box. Change the background colour, or replace the
+           whole <div class="thumb"> with <img src="images/project1.jpg" alt="..."> 
+           after adding the image to an "images" folder in your repo.
+         - href="#": replace with a link to the full case study, PDF or live campaign. -->
+    <section id="work">
+      <h2>Selected work</h2>
+      <div class="cases">
+
+        <article class="case">
+          <div class="thumb" style="background:#2B3BFF;">Project name</div>
+          <div class="body">
+            <span class="tag">Email marketing | Client or company name</span>
+            <h3>Win-back campaign for lapsed customers</h3>
+            <p>One or two sentences: the problem, what you did, and the tools or channels you used.</p>
+            <p class="result">Result: 18% of lapsed customers reactivated.</p>
+            <a class="more" href="#">Read the case study</a>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="thumb" style="background:#E0457B;">Project name</div>
+          <div class="body">
+            <span class="tag">Paid social | Client or company name</span>
+            <h3>Product launch on Instagram and TikTok</h3>
+            <p>One or two sentences: the problem, what you did, and the tools or channels you used.</p>
+            <p class="result">Result: 3.4x return on ad spend.</p>
+            <a class="more" href="#">Read the case study</a>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="thumb" style="background:#0E8F6B;">Project name</div>
+          <div class="body">
+            <span class="tag">SEO and content | Client or company name</span>
+            <h3>Blog strategy that doubled organic traffic</h3>
+            <p>One or two sentences: the problem, what you did, and the tools or channels you used.</p>
+            <p class="result">Result: organic traffic up 112% in 9 months.</p>
+            <a class="more" href="#">Read the case study</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== SERVICES / SKILLS =====
+         EDIT: rename these to what you actually offer or are best at.
+         Add or remove <div> blocks freely; the grid adjusts itself. -->
+    <section id="services">
+      <h2>What I can do for you</h2>
+      <div class="services">
+        <div><h3>Campaign strategy</h3><p>Goals, audience, budget and a clear plan for reaching them.</p></div>
+        <div><h3>Paid advertising</h3><p>Google, Meta, LinkedIn and TikTok campaigns built around cost per customer.</p></div>
+        <div><h3>Email and automation</h3><p>Welcome series, newsletters and flows that earn replies and sales.</p></div>
+        <div><h3>Content and SEO</h3><p>Articles, landing pages and keyword plans that bring in steady traffic.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT =====
+         EDIT: replace images/profile.jpg with your own photo (add it to an
+         "images" folder in your repo), and rewrite the paragraphs.
+         If you don't want a photo, delete the <img> line and the layout will adapt. -->
+    <section id="about">
+      <h2>About me</h2>
+      <div class="about">
+        <img class="photo" src="images/profile.jpg" alt="Portrait of Your Name">
+        <div>
+          <p>Write two or three sentences on your background: where you've worked, what you studied, and the kind of marketing you enjoy most.</p>
+          <p>Add one personal line about how you work, such as how you report results or what clients can expect from you.</p>
+          <!-- EDIT: tools you use -->
+          <p class="tools">Tools: Google Analytics, HubSpot, Mailchimp, Meta Ads Manager, Canva, SEMrush</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT =====
+         EDIT: replace the email address in the href (keep "mailto:") and the button.
+         Add your resume by uploading a PDF to the repo and linking to it. -->
+    <section id="contact" class="contact">
+      <h2>Let's talk about your next campaign</h2>
+      <p>Tell me what you're trying to achieve and I'll reply within two working days.</p>
+      <a class="btn" href="mailto:you@example.com">Email me</a>
+      <a class="btn ghost" href="resume.pdf">Download my resume</a>
+    </section>
+
+  </div>
+
+  <!-- ===== FOOTER =====
+       EDIT: social links (replace each URL) and your name. Delete any you don't use. -->
+  <footer>
+    <a href="https://www.linkedin.com/in/your-profile">LinkedIn</a>
+    <a href="https://github.com/your-username">GitHub</a>
+    <a href="https://twitter.com/your-handle">X / Twitter</a>
+    <p style="margin-top:.8rem;">&copy; 2026 Your Name</p>
+  </footer>
+</body>
+</html>
